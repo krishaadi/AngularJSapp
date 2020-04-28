@@ -1,10 +1,16 @@
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+const express = require('express');
+const app = express();
+const path = require('path');
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.use('/', express.static(__dirname + '/'));
+
+app.get('/*', (req,res) => {
+res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+const hostname = 'localhost';
+const port = 3000 ;
+
+const server = app.listen(port, hostname, () => {
+  console.log('Server listening at http://${hostname}:${port}');  
+})
