@@ -9,7 +9,7 @@ homeController.$inject = ['$http', 'authService']
 
         vm.message = '';
         vm.getMessage = function() {
-            $http.get('http://localhost:8080/authorized')
+            $http.get('https://angular-app0auth.herokuapp.com/authorized')
             .then(
                 function(result)
                 {
