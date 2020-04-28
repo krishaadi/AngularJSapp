@@ -1,16 +1,44 @@
-const express = require('express');
-const app = express();
-const path = require('path');
+const http = require('http');
+const url = require('url');
+const path =require('path');
+const fs = require('fs');
+const mimeTypes = {
+	"html": "text/html" ,
+	"jpeg": "image/jpeg",
+	"jpg": "image/jpg",
+	"png":"image/png",
+	"js" :"text/javascript",
+	"css" :"text/css"
+};
 
-app.use('/', express.static(__dirname + '/'));
+http.createServer(function(req,res){
+	var uri = url.parse(req.url).pathname;
+	var fileName = path.join(process.cwd(), unescape(uri));
+	console.log('Loading ' + uri);
+	var stats;
+	//create try catch block
+	try {
+		stats = fs.lstatSync(fileName);
+	} catch (e) {
+		res.writeHead(404, {'Content-type': 'text/plai'});
+		res.write('404 Not Found\n');
+		res.end();
+		return;
+	}
 
-app.get('/*', (req,res) => {
-res.sendFile(path.join(__dirname + '/index.html'));
-});
-
-const hostname = 'localhost';
-const port = 3000 ;
-
-const server = app.listen(port, hostname, () => {
-  console.log('Server listening at http://${hostname}:${port}');  
-})
+	if(stats.isFile()){
+		var mimeType = mimeTypes[path.extname(fileName).split]
+		res.writeHead(200, {'Content-type': mimeTypes});
+		var fileStream = fs.createReadStream(fileName);
+		fileStream.pipe(res);		
+	}else if(stats.isDirectory()){
+		res.writeHead(200, {
+			'Location': 'index.html'
+		});
+		res.end();
+	}else{
+		res.writeHead(500, {'Content-type': 'text/plain'});
+		res.write('500 Internal Error\n');
+		res.end();
+	}
+}).listen(3000);
