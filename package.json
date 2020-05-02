@@ -19,7 +19,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^5.3.3",
-    "jquery": "^1.9.1",
+    "jquery": "^3.5.0",
     "jwks-rsa": "^1.8.0"
   }
 }
