@@ -43,7 +43,8 @@
                     clientID: 'flvHqyyMxrTvINVZ7w9xUBbR7RlTp3LF',
                     domain:'dev-auth-delo.auth0.com',
                     responseType: 'token id_token', // token and id token
-                    redirectUri: 'https://angularclientauth.herokuapp.com/callback',
+                    redirectUri: 'https://angularclientauth.herokuapp.com/home', //callback URL
+                   // redirectUri: 'http://localhost:3000/home', 
                     scope: 'openid profile',
                     audience: 'http://dev-auth-delo.com/apis'
                 }) ;// initiate autorization 
