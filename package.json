@@ -18,7 +18,7 @@
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-jwt": "^5.3.3",
+    "express-jwt": "^6.0.0",
     "jquery": "^1.9.1",
     "jwks-rsa": "^1.8.0"
   }
